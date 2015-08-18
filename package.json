@@ -1,0 +1,24 @@
+{
+  "name": "node-sugs",
+  "version": "0.0.1",
+  "description": "Nothing to see here. Move along. (Just me plaing with Node.js.)",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "3.5.2",
+    "jade": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daniel-ac-martin/node-sugs.git"
+  },
+  "author": "Daniel A.C. Martin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daniel-ac-martin/node-sugs/issues"
+  }
+}
