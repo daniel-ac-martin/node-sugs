@@ -7,12 +7,11 @@
 {{/propositionHeader}}
 
 {{$content}}
-  {{<partials-form}}
-    {{$form}}
-      <p>This is a form template</p>
-      {{#input-submit}}test{{/input-submit}}
-    {{/form}}
-  {{/partials-form}}
+  <p>What would you like to do?:</p>
+  <ul>
+    <li><a href="/form">Fill out the form</a></li>
+    <li><a href="/results">View the results</a></li>
+  </ul>
 {{/content}}
 
 {{/layout}}

@@ -1,0 +1,33 @@
+{{<layout}}
+
+  {{$validationSummary}}
+    {{> partials-validation-summary}}
+  {{/validationSummary}}
+
+  {{$propositionHeader}}
+    {{> partials-navigation}}
+  {{/propositionHeader}}
+
+  {{$header}}{{#t}}pages.form.header{{/t}}{{/header}}
+
+  {{$content}}
+
+    {{<partials-form}}
+
+      {{$form}}
+
+        {{#input-text}}name{{/input-text}}
+        <div class="form-label-bold">{{#t}}fields.sex.legend{{/t}}</div>
+        {{#radio-group}}sex{{/radio-group}}
+        {{#input-text}}age{{/input-text}}
+        {{#select}}country{{/select}}
+
+        {{#input-submit}}submit{{/input-submit}}
+
+      {{/form}}
+
+    {{/partials-form}}
+
+  {{/content}}
+
+{{/layout}}

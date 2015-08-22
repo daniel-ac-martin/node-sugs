@@ -1,0 +1,62 @@
+{
+  "buttons": {
+    "test": "Start",
+    "continue": "Continue",
+    "submit": "Submit",
+    "close": "Close"
+  },
+  "errorlist": {
+    "title": {
+      "single": "Please fix the following error",
+      "multiple": "Please fix the following errors"
+    }
+  },
+  "validation": {
+    "sex": {
+      "required": "Tell us your sex"
+    },
+    "country": {
+      "required": "Tell us where you are"
+    }
+  },
+  "fields": {
+    "name": {
+      "label": "Name"
+    },
+    "sex": {
+      "legend": "Sex",
+      "title": "What is your sex?",
+      "options": {
+        "male": {
+          "label": "Male"
+        },
+        "female": {
+          "label": "Female"
+        }
+      }
+    },
+    "age": {
+      "label": "Age"
+    },
+    "country": {
+      "label": "Country",
+      "options": {
+        "uk": {
+          "label": "United Kingdom"
+        },
+        "france": {
+          "label": "France"
+        }
+      }
+    }
+  },
+  "pages": {
+    "form": {
+      "header": "Form"
+    },
+    "form-complete": {
+      "header": "Application Complete",
+      "para": "Thankyou for applying to this useful government service."
+    }
+  }
+}

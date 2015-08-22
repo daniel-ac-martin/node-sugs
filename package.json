@@ -17,12 +17,15 @@
     "postinstall": "npm run create:public; npm run sass; npm run browserify; npm run copy:images"
   },
   "dependencies": {
+    "body-parser": "^1.13.0",
     "browserify": "^10.2.4",
-    "express": "3.5.2",
+    "express": "^4.12.4",
     "express-partial-templates": "^0.1.0",
     "hmpo-frontend-toolkit": "^1.2.1",
     "hmpo-govuk-template": "0.0.3",
+    "hmpo-template-mixins": "^0.6.0",
     "hogan-express-strict": "^0.5.4",
+    "i18n-future": "^0.1.4",
     "node-sass": "^3.2.0"
   },
   "devDependencies": {
