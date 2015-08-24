@@ -54,44 +54,90 @@ app.use(function setBaseUrl(req, res, next) {
 //app.use(app.router);
 //app.use(express.static(path.join(__dirname, 'public')));
 
-var fields = require('./routes/fields');
-var mixins = require('hmpo-template-mixins');
-var i18n = require('i18n-future')();
-app.use(mixins(i18n.translate.bind(i18n), fields));
+// Grab countries data
+////////////////////////////////////////////////////////////////////////////////
+var fs = require('fs');
 
-app.get ('/',              routes.index);
-app.get ('/form',          routes.form);
-app.post('/form',          routes.form_submission);
-app.get ('/form-complete', routes.form_complete);
-app.get ('/results',       routes.results);
-//app.get('/users', user.list);
+var file_url = 'https://restcountries.eu/rest/v1/region/Europe';
+var target = './routes/fields/countries.json';
 
-// development only
-//if ('development' == app.get('env')) {
-//  app.use(express.errorHandler());
-//}
+function download(file_url, target, callback) {
+  var
+    url     = require('url'),
+    options = {
+      host: url.parse(file_url).host,
+      port: 80, // FIXME: SSL please!
+      path: url.parse(file_url).pathname
+    },
+    file    = fs.createWriteStream(target)
+      .on('error', function(err){
+        console.log(err);
+        callback(err);
+      })
+      .on('open', function(){
+        http.get(options, function(res) {
+          res
+            .on('data', function(data){
+              file.write(data);
+            })
+            .on('end', function(){
+              file.end(function(){
+                console.log('Downloaded ' + file_url + ' to ' + target);
+                callback(null, target);
+              });
+            });
+        })
+          .on('error', function(err){
+            file.end();
+            console.log(err);
+            callback(err);
+          });
+      });
+}
+////////////////////////////////////////////////////////////////////////////////
 
-var mongoose = require('mongoose');
-var mongoUrl    = 'mongodb://' +
-  (config.db.user
-    ? config.db.user +
-      (config.db.pass
-        ? ':' + config.db.pass
-        : '') + '@'
-    : '') + config.db.host +
-  (config.db.port
-    ? ':' + config.db.port
-    : '') + '/' + config.db.name;
+download(file_url, target, function(err){
+  var
+    fields = require('./routes/fields'),
+    mixins = require('hmpo-template-mixins'),
+    i18n = require('i18n-future')();
 
-mongoose.connect(mongoUrl);
-mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
-mongoose.connection.once('open', function (callback) {
-  console.log('Connected to mongodb at ' + mongoUrl);
+  app.use(mixins(i18n.translate.bind(i18n), fields));
 
-  app.listen(config.port, config.listen_host);
+  app.get ('/',              routes.index);
+  app.get ('/form',          routes.form);
+  app.post('/form',          routes.form_submission);
+  app.get ('/form-complete', routes.form_complete);
+  app.get ('/results',       routes.results);
+  //app.get('/users', user.list);
 
-  //debug('App listening on port %o', config.port);
-  console.log('App listening on port', config.port);
+  // development only
+  //if ('development' == app.get('env')) {
+  //  app.use(express.errorHandler());
+  //}
+
+  var mongoose = require('mongoose');
+  var mongoUrl    = 'mongodb://' +
+    (config.db.user
+      ? config.db.user +
+        (config.db.pass
+          ? ':' + config.db.pass
+          : '') + '@'
+      : '') + config.db.host +
+    (config.db.port
+      ? ':' + config.db.port
+      : '') + '/' + config.db.name;
+
+  mongoose.connect(mongoUrl);
+  mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+  mongoose.connection.once('open', function (callback) {
+    console.log('Connected to mongodb at ' + mongoUrl);
+
+    app.listen(config.port, config.listen_host);
+
+    //debug('App listening on port %o', config.port);
+    console.log('App listening on port', config.port);
+  });
 });
 
 /*

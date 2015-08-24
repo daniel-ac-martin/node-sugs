@@ -31,7 +31,7 @@ module.exports = {
     label: 'fields.country.label',
     options: [{
       value: 'uk',
-      label: 'fields.country.options.uk.label'
+      label: 'fields.country.options.uk.label',
     }, {
       value: 'france',
       label: 'fields.country.options.france.label'
