@@ -57,6 +57,10 @@
     "form-complete": {
       "header": "Application Complete",
       "para": "Thankyou for applying to this useful government service."
+    },
+    "results": {
+      "header": "Results",
+      "para": "Here are the results:"
     }
   }
 }

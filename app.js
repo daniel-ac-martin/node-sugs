@@ -71,10 +71,29 @@ app.get ('/results',       routes.results);
 //  app.use(express.errorHandler());
 //}
 
-app.listen(config.port, config.listen_host);
+var mongoose = require('mongoose');
+var mongoUrl    = 'mongodb://' +
+  (config.db.user
+    ? config.db.user +
+      (config.db.pass
+        ? ':' + config.db.pass
+        : '') + '@'
+    : '') + config.db.host +
+  (config.db.port
+    ? ':' + config.db.port
+    : '') + '/' + config.db.name;
 
-//debug('App listening on port %o', config.port);
-console.log('App listening on port', config.port);
+mongoose.connect(mongoUrl);
+mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+mongoose.connection.once('open', function (callback) {
+  console.log('Connected to mongodb at ' + mongoUrl);
+
+  app.listen(config.port, config.listen_host);
+
+  //debug('App listening on port %o', config.port);
+  console.log('App listening on port', config.port);
+});
+
 /*
 app.set('port', process.env.PORT || config.port);
 

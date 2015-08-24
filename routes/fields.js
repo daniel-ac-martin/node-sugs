@@ -2,7 +2,9 @@
 
 module.exports = {
   'name': { // Redundant?
-    label: 'fields.name.label'
+    label: 'fields.name.label',
+    placeholder: 'John Doe', // Not currently supported by hmpo-template-mixins - add support?
+    autofocus: 'autofocus', // Not currently supported by hmpo-template-mixins - add support?
   },
   'sex': {
 	legend: 'fields.sex.legend',
@@ -22,6 +24,7 @@ module.exports = {
     label: 'fields.age.label',
     type: 'number',
     min: '0', // Not currently supported by hmpo-template-mixins - add support?
+    placeholder: '18', // Not currently supported by hmpo-template-mixins - add support?
   },
   'country': {
     validate: ['required'],
