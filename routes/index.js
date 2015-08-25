@@ -24,7 +24,7 @@ exports.form_submission = function(req, res){
   // Insert into database
   var model = new FormModel({
     name:    req.body.name,
-    isMale:  ('male' === req.body.sex) ? 1 : 0,
+    sex:     ('male' === req.body.sex) ? 1 : 0,
     age:     req.body.age,
     country: req.body.country
   });
