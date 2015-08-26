@@ -10,5 +10,9 @@ module.exports = {
     port: 27017,
     user: '',
     pass: ''
+  },
+  session: {
+    secret: process.env.SESSION_SECRET || 'nodesugs',
+    ttl: process.env.SESSION_TTL || 900
   }
 };

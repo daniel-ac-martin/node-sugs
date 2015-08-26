@@ -107,11 +107,33 @@ download(fileUrl, target, function(err){
   mongoose.connection.once('open', function (callback) {
     console.log('Connected to mongodb at ' + mongoUrl);
 
-    // 3. Set-up routes
+    // 3. Set-up sessions
+    ////////////////////////////////////////////////////////////////////////////
+    var
+      session = require('express-session'),
+      MongoStore = require('connect-mongo')(session);
+
+    function initSession(req, res, next)
+    {
+      session({
+        cookie: {
+          secure: (req.protocol === 'https')
+        },
+        resave: true,
+        saveUninitialized: true,
+        secret: config.session.secret,
+        store: new MongoStore({ mongooseConnection: mongoose.connection })
+      })(req, res, next);
+    }
+
+    app.use(require('cookie-parser')(config.session.secret));
+    app.use(initSession);
+
+    // 4. Set-up routes
     ////////////////////////////////////////////////////////////////////////////
     app.use(require('./routes'));
 
-    // 4. Start the app!
+    // 5. Start the app!
     ////////////////////////////////////////////////////////////////////////////
     app.listen(config.port, config.listen_host);
 
