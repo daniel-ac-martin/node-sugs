@@ -1,7 +1,5 @@
 {
   "buttons": {
-    "test": "Start",
-    "continue": "Continue",
     "submit": "Submit",
     "close": "Close"
   },
@@ -12,8 +10,15 @@
     }
   },
   "validation": {
+    "name": {
+      "required": "Tell us your name"
+    },
     "sex": {
       "required": "Tell us your sex"
+    },
+    "age": {
+      "required": "Tell us your age",
+      "numeric": "Provide your age in whole years"
     },
     "country": {
       "required": "Tell us where you are"
@@ -40,14 +45,7 @@
     },
     "country": {
       "label": "Country",
-      "options": {
-        "uk": {
-          "label": "United Kingdom"
-        },
-        "france": {
-          "label": "France"
-        }
-      }
+      "options": {}
     }
   },
   "pages": {

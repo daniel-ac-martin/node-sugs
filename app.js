@@ -87,16 +87,7 @@ function download(fileUrl, target, callback) {
 }
 
 download(fileUrl, target, function(err){
-  // 2. Set-up hmpo-template-mixins
-  //////////////////////////////////////////////////////////////////////////////
-  var
-    mixins = require('hmpo-template-mixins'),
-    i18n   = require('i18n-future')(),
-    fields = require('./routes/fields');
-
-  app.use(mixins(i18n.translate.bind(i18n), fields));
-
-  // 3. Set-up mongoose
+  // 2. Set-up mongoose
   //////////////////////////////////////////////////////////////////////////////
   var
     mongoose = require('mongoose'),
@@ -116,16 +107,11 @@ download(fileUrl, target, function(err){
   mongoose.connection.once('open', function (callback) {
     console.log('Connected to mongodb at ' + mongoUrl);
 
-    // 4. Set-up routes
+    // 3. Set-up routes
     ////////////////////////////////////////////////////////////////////////////
     app.use(require('./routes'));
 
-    // development only
-    //if ('development' == app.get('env')) {
-    //  app.use(express.errorHandler());
-    //}
-
-    // 5. Start the app!
+    // 4. Start the app!
     ////////////////////////////////////////////////////////////////////////////
     app.listen(config.port, config.listen_host);
 

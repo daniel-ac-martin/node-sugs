@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = {
-  'name': { // Redundant?
+  'name': {
+    validate: ['required'],
     label: 'fields.name.label',
     placeholder: 'John Doe', // Not currently supported by hmpo-template-mixins - add support?
     autofocus: 'autofocus', // Not currently supported by hmpo-template-mixins - add support?
@@ -29,19 +30,9 @@ module.exports = {
   'country': {
     validate: ['required'],
     label: 'fields.country.label',
-    options: [{
-      value: 'uk',
-      label: 'fields.country.options.uk.label',
-    }, {
-      value: 'france',
-      label: 'fields.country.options.france.label'
-    }]
+    options: []
   },
   submit: {
     value: 'buttons.submit'
-  },
-  /****************************************************************************/
-  'continue': {
-    value: 'buttons.continue'
   }
 };
