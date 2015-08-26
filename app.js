@@ -118,16 +118,7 @@ download(fileUrl, target, function(err){
 
     // 4. Set-up routes
     ////////////////////////////////////////////////////////////////////////////
-    var
-      //user = require('./routes/user'),
-      routes = require('./routes');
-
-    app.get ('/',              routes.index);
-    app.get ('/form',          routes.form);
-    app.post('/form',          routes.form_submission);
-    app.get ('/form-complete', routes.form_complete);
-    app.get ('/results',       routes.results);
-    //app.get('/users', user.list);
+    app.use(require('./routes'));
 
     // development only
     //if ('development' == app.get('env')) {

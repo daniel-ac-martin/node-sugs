@@ -1,21 +1,23 @@
 'use strict';
 
-var path = require('path');
+var
+  router    = require('express').Router(),
+  path      = require('path'),
+  FormModel = new require('../models/form');
 
-/*
- * GET home page.
- */
-var FormModel = new require('../models/form');
+function FormController()
+{
+}
 
-exports.index = function(req, res){
+FormController.prototype.indexAction = function(req, res){
   res.render(path.join('pages', 'index'), { title: 'Index' });
 };
 
-exports.form = function(req, res){
+FormController.prototype.formAction = function(req, res){
   res.render(path.join('pages', 'form'));
 };
 
-exports.form_submission = function(req, res){
+FormController.prototype.formSubmissionAction = function(req, res){
   var queryString = (undefined === req.body.name || '' === req.body.name)
     ? ''
     : '?name=' + req.body.name;
@@ -36,7 +38,7 @@ exports.form_submission = function(req, res){
   });
 };
 
-exports.form_complete = function(req, res){
+FormController.prototype.formCompleteAction = function(req, res){
   var name = (undefined === req.query.name)
     ? ''
     : req.query.name;
@@ -44,10 +46,21 @@ exports.form_complete = function(req, res){
   res.render(path.join('pages', 'form-complete'), { name: name });
 };
 
-exports.results = function(req, res){
+FormController.prototype.resultsAction = function(req, res){
   FormModel.find(function (err, data){
     err
       ? console.error(err) // FIXME: Send error page?
       : res.render(path.join('pages', 'results'), { data: data });
   });
 };
+
+var
+  formController = new FormController();
+
+router.get ('/',              formController.indexAction);
+router.get ('/form',          formController.formAction);
+router.post('/form',          formController.formSubmissionAction);
+router.get ('/form-complete', formController.formCompleteAction);
+router.get ('/results',       formController.resultsAction);
+
+module.exports = router;
